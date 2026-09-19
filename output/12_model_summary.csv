@@ -1,0 +1,16 @@
+Metric,Value
+Total Articles,44898
+Fake Articles,23481
+Real Articles,21417
+Train Size,35918
+Test Size,8980
+Model,Decision Tree
+Criterion,entropy
+Max Depth,20
+Accuracy (%),99.62
+Precision (Fake),0.9957
+Recall (Fake),0.997
+F1-Score (Fake),0.9964
+Precision (Real),0.9967
+Recall (Real),0.9953
+F1-Score (Real),0.996
