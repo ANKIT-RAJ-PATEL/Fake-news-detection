@@ -7,7 +7,6 @@
 
 # Import the libraries
 
-# In[26]:
 
 
 import pandas as pd
@@ -24,20 +23,14 @@ from sklearn.pipeline import Pipeline
 
 # ## Read datasets
 
-# In[27]:
 
 
 fake = pd.read_csv("Fake\\Fake.csv")
 true = pd.read_csv("True\\True.csv")
 
 
-# In[28]:
-
 
 fake.shape
-
-
-# In[29]:
 
 
 true.shape
@@ -45,27 +38,17 @@ true.shape
 
 # ## Data cleaning and preparation
 
-# In[30]:
-
 
 # Add flag to track fake and real
 fake['target'] = 'fake'
 true['target'] = 'true'
 
 
-# In[31]:
-
-
 fake.head()
-
-
-# In[32]:
 
 
 true.head()
 
-
-# In[33]:
 
 
 # Concatenate dataframes
@@ -73,19 +56,11 @@ data = pd.concat([fake, true]).reset_index(drop = True)
 data.shape
 
 
-# In[34]:
-
 
 data.head(5)
 
 
-# In[35]:
-
-
 data.tail(5)
-
-
-# In[36]:
 
 
 # Shuffle the data
@@ -94,20 +69,11 @@ data = shuffle(data)
 data = data.reset_index(drop=True)
 
 
-# In[37]:
-
-
 # Check the data
 data.head()
 
 
-# In[38]:
-
-
 data.info()
-
-
-# In[39]:
 
 
 # Removing the date 
@@ -115,15 +81,9 @@ data.drop(["date"],axis=1,inplace=True)
 data.head()
 
 
-# In[40]:
-
-
 # Removing the title
 data.drop(["title"],axis=1,inplace=True)
 data.head()
-
-
-# In[17]:
 
 
 # Convert to lowercase
@@ -131,8 +91,6 @@ data.head()
 data['text'] = data['text'].apply(lambda x: x.lower())
 data.head()
 
-
-# In[18]:
 
 
 # Remove punctuation
@@ -147,14 +105,10 @@ def punctuation_removal(text):
 data['text'] = data['text'].apply(punctuation_removal)
 
 
-# In[19]:
-
 
 # Check
 data.head()
 
-
-# In[20]:
 
 
 # Removing stopwords
@@ -166,15 +120,11 @@ stop = stopwords.words('english')
 data['text'] = data['text'].apply(lambda x: ' '.join([word for word in x.split() if word not in (stop)]))
 
 
-# In[21]:
-
 
 data.head()
 
 
 # ## Basic data exploration
-
-# In[22]:
 
 
 # How many articles per subject?
@@ -183,7 +133,6 @@ data.groupby(['subject'])['text'].count().plot(kind="bar")
 plt.show()
 
 
-# In[23]:
 
 
 # How many fake and real articles?
@@ -192,13 +141,6 @@ data.groupby(['target'])['text'].count().plot(kind="bar")
 plt.show()
 
 
-# In[24]:
-
-
-# !pip install wordcloud
-
-
-# In[25]:
 
 
 # Word cloud for fake news
@@ -217,9 +159,6 @@ plt.axis("off")
 plt.show()
 
 
-# In[ ]:
-
-
 # Word cloud for real news
 from wordcloud import WordCloud
 
@@ -234,9 +173,6 @@ plt.figure(figsize=(10,7))
 plt.imshow(wordcloud, interpolation='bilinear')
 plt.axis("off")
 plt.show()
-
-
-# In[ ]:
 
 
 # Most frequent words counter   
@@ -258,14 +194,10 @@ def counter(text, column_text, quantity):
     plt.show()
 
 
-# In[ ]:
-
 
 # Most frequent words in fake news
 counter(data[data["target"] == "fake"], "text", 20)
 
-
-# In[ ]:
 
 
 # Most frequent words in real news
@@ -274,7 +206,6 @@ counter(data[data["target"] == "true"], "text", 20)
 
 # ## Modeling
 
-# In[ ]:
 
 
 # Function to plot the confusion matrix
@@ -312,20 +243,15 @@ def plot_confusion_matrix(cm, classes,
 
 # ### Split Data
 
-# In[ ]:
-
 
 # Split the data
 X_train,X_test,y_train,y_test = train_test_split(data['text'], data.target, test_size=0.2, random_state=42)
 
 
-# In[ ]:
 
 
 X_train.head()
 
-
-# In[ ]:
 
 
 y_train.head()
@@ -333,7 +259,6 @@ y_train.head()
 
 # ### Decision Tree Classifier
 
-# In[ ]:
 
 
 from sklearn.tree import DecisionTreeClassifier
@@ -353,21 +278,6 @@ prediction = model.predict(X_test)
 print("accuracy: {}%".format(round(accuracy_score(y_test, prediction)*100,2)))
 
 
-# In[ ]:
-
 
 cm = metrics.confusion_matrix(y_test, prediction)
 plot_confusion_matrix(cm, classes=['Fake', 'Real'])
-
-
-# In[ ]:
-
-
-
-
-
-# In[ ]:
-
-
-
-
