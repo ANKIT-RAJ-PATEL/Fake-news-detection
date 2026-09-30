@@ -125,8 +125,8 @@ def load_and_prepare():
     stop = stopwords.words('english')
 
     # Read datasets
-    fake = pd.read_csv("Fake\\Fake.csv")
-    true = pd.read_csv("True\\True.csv")
+    fake = pd.read_csv("Fake/Fake.csv")
+    true = pd.read_csv("True/True.csv")
 
     raw_shapes = (fake.shape, true.shape)
 

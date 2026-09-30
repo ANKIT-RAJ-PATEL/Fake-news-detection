@@ -25,8 +25,8 @@ from sklearn.pipeline import Pipeline
 
 
 
-fake = pd.read_csv("Fake\\Fake.csv")
-true = pd.read_csv("True\\True.csv")
+fake = pd.read_csv("Fake/Fake.csv")
+true = pd.read_csv("True/True.csv")
 
 
 

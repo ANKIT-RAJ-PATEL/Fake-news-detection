@@ -1,5 +1,8 @@
 streamlit
 nltk
-pandas
 numpy
+pandas
+matplotlib
+seaborn
 scikit-learn
+wordcloud
